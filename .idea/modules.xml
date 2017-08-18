@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/xdzl.iml" filepath="$PROJECT_DIR$/xdzl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zl-boot-common/zl-boot-common.iml" filepath="$PROJECT_DIR$/zl-boot-common/zl-boot-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zl-boot-security/zl-boot-security.iml" filepath="$PROJECT_DIR$/zl-boot-security/zl-boot-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zl-micro/zl-micro.iml" filepath="$PROJECT_DIR$/zl-micro/zl-micro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zl-micro/zl-micro-test/zl-micro-test.iml" filepath="$PROJECT_DIR$/zl-micro/zl-micro-test/zl-micro-test.iml" />
+    </modules>
+  </component>
+</project>

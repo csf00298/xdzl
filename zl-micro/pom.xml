@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>com.xdzl</groupId>
+    <artifactId>zl-micro</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>micro boot :: boot-micro</name>
+
+
+    <parent>
+        <groupId>com.xdzl</groupId>
+        <artifactId>xdzl</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <modules>
+        <module>zl-micro-test</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xdzl</groupId>
+            <artifactId>zl-boot-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-swagger-ui</artifactId>
+                    <version>2.5.0</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+
+            <properties>
+                <profile_id>dev</profile_id>
+                <logback.log.path>E:</logback.log.path>
+            </properties>
+        </profile>
+        <profile>
+            <id>sit</id>
+            <dependencies>
+                <dependency>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-swagger-ui</artifactId>
+                    <version>2.5.0</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+
+            <properties>
+                <profile_id>sit</profile_id>
+                <logback.log.path>/data/logs/zl</logback.log.path>
+            </properties>
+
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <profile_id>production</profile_id>
+                <logback.log.path>/data/logs/zl</logback.log.path>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <!-- 注意默认的fitler delimeter 被修改为了 @var@ -->
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>../config/</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <!-- 注意默认的fitler delimeter 被修改为了 @var@ -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
