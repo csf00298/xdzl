@@ -7,8 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zl-boot-common" />
-        <module name="zl-boot-security" />
-        <module name="zl-micro" />
         <module name="zl-micro-test" />
       </profile>
     </annotationProcessing>

@@ -6,6 +6,8 @@
     <groupId>com.xdzl</groupId>
     <artifactId>zl-micro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <name>micro boot :: boot-micro</name>
 
 

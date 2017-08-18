@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/xdzl.iml" filepath="$PROJECT_DIR$/xdzl.iml" />
       <module fileurl="file://$PROJECT_DIR$/zl-boot-common/zl-boot-common.iml" filepath="$PROJECT_DIR$/zl-boot-common/zl-boot-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zl-boot-security/zl-boot-security.iml" filepath="$PROJECT_DIR$/zl-boot-security/zl-boot-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/zl-micro/zl-micro.iml" filepath="$PROJECT_DIR$/zl-micro/zl-micro.iml" />
       <module fileurl="file://$PROJECT_DIR$/zl-micro/zl-micro-test/zl-micro-test.iml" filepath="$PROJECT_DIR$/zl-micro/zl-micro-test/zl-micro-test.iml" />
     </modules>
