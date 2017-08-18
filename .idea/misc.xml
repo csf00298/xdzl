@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/zl-boot-common/pom.xml" />
         <option value="$PROJECT_DIR$/zl-micro/zl-micro-test/pom.xml" />
+        <option value="$PROJECT_DIR$/zl-micro/zl-boot-security/pom.xml" />
       </list>
     </option>
   </component>
