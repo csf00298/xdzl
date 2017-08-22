@@ -30,5 +30,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
                 .logout().permitAll();
+        /*http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and().formLogin().loginPage("/login")
+                //设置默认登录成功跳转页面
+                .defaultSuccessUrl("/index").failureUrl("/login?error").permitAll()
+                .and()
+                //开启cookie保存用户数据
+                .rememberMe()
+                //设置cookie有效期
+                .tokenValiditySeconds(60 * 60 * 24 * 7)
+                //设置cookie的私钥
+                .key("")
+                .and()
+                .logout()
+                //默认注销行为为logout，可以通过下面的方式来修改
+                .logoutUrl("/custom-logout")
+                //设置注销成功后跳转页面，默认是跳转到登录页面
+                .logoutSuccessUrl("")
+                .permitAll();*/
     }
+
 }
