@@ -18,7 +18,7 @@
                 console.log('Connected:' + frame);
                 //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息,这个是在控制器的@SentTo中定义的
                 stompClient.subscribe('/topic/send', function (response) {
-                    showResponse(JSON.parse(response.body).responseMessage);
+                    showResponse(JSON.parse(response.body));
                 });
 
                 /*// 注册发送消息
@@ -53,12 +53,12 @@
         function sendName() {
             var name = $("#name").val();
             //通过stompClient.send向/welcome 目标(destination)发送消息,这个是在控制器的@MessageMapping中定义的
-            stompClient.send("/topic/send", {}, JSON.stringify({'message': name}));
+            stompClient.send("/send", {}, JSON.stringify({'message': name}));
             //TODO
         }
 
         function showResponse(message) {
-            $("#response").html(message);
+            $("#response").html(message.message);
         }
 
     </script>

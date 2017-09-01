@@ -1,6 +1,8 @@
 package com.zl.contoller;
 
 import com.zl.entity.SocketMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -19,6 +21,8 @@ import java.util.Date;
  */
 @Controller
 public class SocketMsgController {
+    private Logger logger = LoggerFactory.getLogger(SocketMsgController.class);
+
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
@@ -40,9 +44,10 @@ public class SocketMsgController {
     @MessageMapping("/send") //和@RequestMapping功能类似，用于设置URL映射地址
     @SendTo("/topic/send")  //当服务器有消息时,会对订阅了@SendTo中的路径的浏览器发送消息
     public SocketMessage send(SocketMessage message) throws Exception {
+        logger.info("ininininininiininini");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        message.toString();
         message.date = df.format(new Date());
-//        callback();
         return message;
     }
 
