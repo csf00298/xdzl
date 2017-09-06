@@ -1,6 +1,8 @@
 package com.zl.contoller;
 
+import com.xdzl.common.utils.DateUtils;
 import com.zl.entity.SocketMessage;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -41,30 +41,28 @@ public class SocketMsgController {
      * 用于接收客户端发送过来的websocket请求。
      * @param message
      */
-    @MessageMapping("/send") //和@RequestMapping功能类似，用于设置URL映射地址
-    @SendTo("/topic/send")  //当服务器有消息时,会对订阅了@SendTo中的路径的浏览器发送消息
+    @MessageMapping("send") //和@RequestMapping功能类似，用于设置URL映射地址
+    @SendTo("/topic/send")  //消息广播到路径,当服务器有消息时,会对订阅了@SendTo中的路径的浏览器发送消息
     public SocketMessage send(SocketMessage message) throws Exception {
-        logger.info("ininininininiininini");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        message.toString();
-        message.date = df.format(new Date());
+        System.out.println(message.toString());
         return message;
     }
 
 
-    @Scheduled(fixedRate = 1000) //springBoot定时任务
-//    @Async
+    @Scheduled(fixedRate = 200) //springBoot定时任务
     @SendTo("/topic/callback")
-    public Object callback() throws Exception {
+    public void callback() throws Exception {
         // 发现消息
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        messagingTemplate.convertAndSend("/topic/callback", df.format(new Date()));
-        return "callback";
-       /* while(true){
-            // 发现消息
-             messagingTemplate.convertAndSend("/topic/callback", "NUM + "+RandomUtils.nextInt(100)*100);
-//            return "callback";
-        }*/
+        messagingTemplate.convertAndSend("/topic/callback", createData());
+//        return "abc";
+    }
+
+    public SocketMessage createData() throws Exception {
+        int i = RandomUtils.nextInt(10) * 100;
+        String date = DateUtils.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss")+"-"+i;
+        SocketMessage msg = new SocketMessage("msg", date);
+        logger.info(msg.toString());
+        return msg;
     }
 
 }

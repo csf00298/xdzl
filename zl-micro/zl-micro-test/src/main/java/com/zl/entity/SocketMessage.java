@@ -25,6 +25,14 @@ public class SocketMessage {
         this.date = date;
     }
 
+    public SocketMessage() {
+    }
+
+    public SocketMessage(String message, String date) {
+        this.message = message;
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "SocketMessage{" +

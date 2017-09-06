@@ -9,18 +9,25 @@
         var stompClient = null;
 
         //连接
+        $(function(){
+            connect();
+        });
+
         function connect() {
             var socket = new SockJS('/my-websocket'); //连接SockJS的endpoint名称为"endpointWisely
             stompClient = Stomp.over(socket);    //使用STMOP子协议的WebSocket客户端
 
             stompClient.connect({}, function (frame) { //连接WebSocket服务端
                 setConnected(true);
-                console.log('Connected:' + frame);
+//                console.log('Connected:' + frame);
                 //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息,这个是在控制器的@SentTo中定义的
-                stompClient.subscribe('/topic/send', function (response) {
+                /*stompClient.subscribe('/topic/send', function (response) {
+                    showResponse(JSON.parse(response.body));
+                });*/
+
+                stompClient.subscribe('/topic/callback', function(response) {
                     showResponse(JSON.parse(response.body));
                 });
-
                 /*// 注册发送消息
                  stompClient.subscribe('/topic/send', function(msg) {
                  data.rows.push(JSON.parse(msg.body));
@@ -33,13 +40,12 @@
 
                  });*/
             });
-        };
-
+        }
         function setConnected(connected) {
             $('#connect').attr("disabled", connected);
             $('#disconnect').attr("disabled", !connected);
             document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-            $("#response").html();
+            $('#msg').html();
         }
 
         function disconnect() {
@@ -47,18 +53,17 @@
                 stompClient.disconnect();
             }
             setConnected(false);
-            console.log("Disconnected");
+            console.log("连接关闭 Disconnected");
         }
 
         function sendName() {
             var name = $("#name").val();
-            //通过stompClient.send向/welcome 目标(destination)发送消息,这个是在控制器的@MessageMapping中定义的
-            stompClient.send("/send", {}, JSON.stringify({'message': name}));
-            //TODO
+            //向"send"映射路径 发送消息, 注意必须要加上 客户端订阅消息的基础路径
+            stompClient.send("/app/send", {}, JSON.stringify({'message': name}));
         }
 
         function showResponse(message) {
-            $("#response").html(message.message);
+            $('#msg').html(message.message +"-"+message.date);
         }
 
     </script>
@@ -74,34 +79,11 @@
     <div id="conversationDiv">
         <label>请输入您的姓名</label><input type="text" id="name"/>
         <button id="sendName" onclick="sendName();">发送</button>
-        <p id="response"></p>
+        <p id=""></p>
     </div>
+
+    <div id="msg"></div>
 </div>
 
-<!--<label>WebSocket连接状态:</label>
-<button type="button" onclick="connect()">连接</button>
-<button type="button" onclick="disconnect()">断开</button>
-<br />
-<br />
-<div>
-    <label>{{data.time}}</label> <br /> <br />
-    <input id="msg" type="text" placeholder="请输入内容..." />
-    <button onclick="send()" type="button">发送</button>
-    <br /> <br /> 消息列表： <br />
-    <table>
-        <thead>
-        <tr>
-            <th>内容</th>
-            <th>时间</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="row in data.rows">
-            <td>{{row.message}}</td>
-            <td>{{row.date}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>-->
 </body>
 </html>
