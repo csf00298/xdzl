@@ -54,7 +54,6 @@ public class SocketMsgController {
     public void callback() throws Exception {
         // 发现消息
         messagingTemplate.convertAndSend("/topic/callback", createData());
-//        return "abc";
     }
 
     public SocketMessage createData() throws Exception {
